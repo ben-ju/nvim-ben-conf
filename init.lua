@@ -1,2 +1,7 @@
 require("config.lazy")
-require("vim-options")
+require("config.vim-options")
+require("config.vim-keymap")
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down and recenter" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up and recenter" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result and recenter" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result and recenter" })
