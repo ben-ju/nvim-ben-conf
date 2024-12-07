@@ -8,6 +8,6 @@ return {
 	},
 	config = function()
 		require("neo-tree").setup({ default_mappings = false })
-		vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal current<CR>", {})
+		vim.keymap.set("n", "<leader>²", ":Neotree filesystem reveal current<CR>", { desc = "Open folder tree" })
 	end,
 }
