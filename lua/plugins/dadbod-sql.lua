@@ -2,7 +2,8 @@ return {
 	"kristijanhusak/vim-dadbod-ui",
 	dependencies = {
 		{ "tpope/vim-dadbod", lazy = true },
-		{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true }, -- Optional
+		{ "kristijanhusak/vim-dadbod-completion", lazy = true }, -- Optional
+		-- { "sql", "mysql", "plsql"
 	},
 	cmd = {
 		"DBUI",
@@ -12,7 +13,7 @@ return {
 	},
 	init = function()
 		vim.g.dbs = {
-			{ name = "dev-poc", url = "mysql://sail:password@localhost:4000/laravel" },
+			{ name = "dev-poc", url = "mysql://sail:password@127.0.0.1:4000/laravel" },
 		} -- Your DBUI configuration
 		vim.g.db_ui_use_nerd_fonts = 1
 	end,

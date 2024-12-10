@@ -25,23 +25,23 @@ return {
 		})
 
 		mason_lspconfig.setup({
-      automatic_installation = true,
+			automatic_installation = true,
 			-- list of servers for mason to install
 			ensure_installed = {
 				"ts_ls",
-				"intelephense",
+				"phpactor",
 				"html",
 				"cssls",
 				"tailwindcss",
 				"lua_ls",
 				"graphql",
 				"emmet_ls",
-        "marksman",
-        "jsonls",
-        "dotls",
-        "docker_compose_language_service",
-        "dockerls",
-        "cssls",
+				"marksman",
+				"jsonls",
+				"dotls",
+				"docker_compose_language_service",
+				"dockerls",
+				"cssls",
 			},
 		})
 

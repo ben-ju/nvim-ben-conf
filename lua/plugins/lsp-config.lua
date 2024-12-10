@@ -85,32 +85,34 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			["intelephense"] = function()
-				-- configure graphql language server
-				lspconfig["intelephense"].setup({
-					-- cmd = { vim.fn.expand("~/.nvm/versions/node/v22.12.0/bin/intelephense"), "--stdio" },
-					-- cmd = { "intelephense", "--stdio" },
-					-- root_dir = require("lspconfig").util.root_pattern("composer.json", ".git", "index.php")
-					-- or vim.loop.cwd(),
-					-- cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/intelephense"), "--stdio" },
-					-- init_options = {
-					--   licenceKey = "009PSYLBDG3DBWA", -- Remplacez par votre clé de licence ou mettez un chemin absolu vers un fichier contenant la clé
-					--   -- storagePath = vim.fn.expand("~/.cache/intelephense"),
-					--   -- globalStoragePath = vim.fn.expand("~/.local/share/intelephense"),
-					--   -- clearCache = true,
-					-- }, -- Commande correcte
-					settings = {
-						intelephense = {
-							files = {
-								maxSize = 1000000, -- Par exemple, augmentez la taille des fichiers supportés
-							},
-						},
-					},
-					filetypes = { "php" },
-				})
-			end,
+			-- ["phpactor"] = function()
+			-- 	lspconfig["phpactor"].setup(
+			-- 		--       {
+			-- 		-- 	-- cmd = { vim.fn.expand("~/.nvm/versions/node/v22.12.0/bin/intelephense"), "--stdio" },
+			-- 		-- 	-- cmd = { "intelephense", "--stdio" },
+			-- 		-- 	-- root_dir = require("lspconfig").util.root_pattern("composer.json", ".git", "index.php")
+			-- 		-- 	-- or vim.loop.cwd(),
+			-- 		-- 	-- cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/intelephense"), "--stdio" },
+			-- 		-- 	-- init_options = {
+			-- 		-- 	--   licenceKey = "009PSYLBDG3DBWA", -- Remplacez par votre clé de licence ou mettez un chemin absolu vers un fichier contenant la clé
+			-- 		-- 	--   -- storagePath = vim.fn.expand("~/.cache/intelephense"),
+			-- 		-- 	--   -- globalStoragePath = vim.fn.expand("~/.local/share/intelephense"),
+			-- 		-- 	--   -- clearCache = true,
+			-- 		-- 	-- }, -- Commande correcte
+			-- 		-- 	settings = {
+			-- 		-- 		intelephense = {
+			-- 		-- 			files = {
+			-- 		-- 				maxSize = 1000000, -- Par exemple, augmentez la taille des fichiers supportés
+			-- 		-- 			},
+			-- 		-- 		},
+			-- 		-- 	},
+			-- 		-- 	filetypes = { "php" },
+			-- 		-- }
+			-- 	)
+
 			["tailwindcss"] = function()
 				lspconfig["tailwindcss"].setup({
+					capabilities = capabilities,
 					filetypes = {
 						"html",
 						"css",
