@@ -2,10 +2,8 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"saghen/blink.cmp",
-		-- "hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-nvim-lsp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
 	},
 	config = function()
 		-- import lspconfig plugin
@@ -15,7 +13,7 @@ return {
 		local mason_lspconfig = require("mason-lspconfig")
 
 		-- import cmp-nvim-lsp plugin
-		-- local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
 		local keymap = vim.keymap -- for conciseness
 
@@ -31,10 +29,10 @@ return {
 				keymap.set("n", "cR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
 				opts.desc = "Go to declaration"
-				keymap.set("n", "cD", vim.lsp.buf.declaration, opts) -- go to declaration
+				keymap.set("n", "cd", vim.lsp.buf.declaration, opts) -- go to declaration
 
 				opts.desc = "Show LSP definitions"
-				keymap.set("n", "cd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+				keymap.set("n", "cD", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
 				opts.desc = "Show LSP implementations"
 				keymap.set("n", "ci", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
@@ -49,7 +47,7 @@ return {
 				keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts) -- smart rename
 
 				opts.desc = "Show buffer diagnostics"
-				keymap.set("n", "<leader>cD", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+				keymap.set("n", "<leader>cB", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
 
 				opts.desc = "Show line diagnostics"
 				keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts) -- show diagnostics for line
@@ -62,15 +60,12 @@ return {
 
 				opts.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "ck", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-				opts.desc = "Restart LSP"
-				keymap.set("n", "<leader>ml", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
 
 		-- used to enable autocompletion (assign to every lsp server config)
-		-- local capabilities = cmp_nvim_lsp.default_capabilities()
-		local capabilities = require("blink.cmp").get_lsp_capabilities()
+		local capabilities = cmp_nvim_lsp.default_capabilities()
+		-- local capabilities = require("blink.cmp").get_lsp_capabilities()
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
@@ -86,95 +81,31 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-			-- ["phpactor"] = function()
-			-- 	lspconfig["phpactor"].setup(
-			-- 		--       {
-			-- 		-- 	-- cmd = { vim.fn.expand("~/.nvm/versions/node/v22.12.0/bin/intelephense"), "--stdio" },
-			-- 		-- 	-- cmd = { "intelephense", "--stdio" },
-			-- 		-- 	-- root_dir = require("lspconfig").util.root_pattern("composer.json", ".git", "index.php")
-			-- 		-- 	-- or vim.loop.cwd(),
-			-- 		-- 	-- cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/intelephense"), "--stdio" },
-			-- 		-- 	-- init_options = {
-			-- 		-- 	--   licenceKey = "009PSYLBDG3DBWA", -- Remplacez par votre clé de licence ou mettez un chemin absolu vers un fichier contenant la clé
-			-- 		-- 	--   -- storagePath = vim.fn.expand("~/.cache/intelephense"),
-			-- 		-- 	--   -- globalStoragePath = vim.fn.expand("~/.local/share/intelephense"),
-			-- 		-- 	--   -- clearCache = true,
-			-- 		-- 	-- }, -- Commande correcte
-			-- 		-- 	settings = {
-			-- 		-- 		intelephense = {
-			-- 		-- 			files = {
-			-- 		-- 				maxSize = 1000000, -- Par exemple, augmentez la taille des fichiers supportés
-			-- 		-- 			},
-			-- 		-- 		},
-			-- 		-- 	},
-			-- 		-- 	filetypes = { "php" },
-			-- 		-- }
-			-- 	)
 
-			["tailwindcss"] = function()
-				lspconfig["tailwindcss"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"html",
-						"css",
-						"javascript",
-						"typescript",
-						"javascriptreact",
-						"typescriptreact",
-						"vue",
-						"svelte",
-					},
-				})
-			end,
-			["volar"] = function()
-				-- configure graphql language server
-				lspconfig["volar"].setup({
-					capabilities = capabilities,
-					filetypes = { "vue" },
-				})
-			end,
-
-			["graphql"] = function()
-				-- configure graphql language server
-				lspconfig["graphql"].setup({
-					capabilities = capabilities,
-					filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-				})
-			end,
-			["emmet_ls"] = function()
-				-- configure emmet language server
-				lspconfig["emmet_ls"].setup({
-					capabilities = capabilities,
-					filetypes = {
-						"html",
-						"typescriptreact",
-						"javascriptreact",
-						"css",
-						"sass",
-						"scss",
-						"less",
-						"svelte",
-						"vue",
-					},
-				})
-			end,
-			["lua_ls"] = function()
-				-- configure lua server (with special settings)
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							-- make the language server recognize "vim" global
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
-							},
-						},
-					},
-				})
-			end,
+			-- 		["tailwindcss"] = function()
+			-- 			lspconfig["tailwindcss"].setup({
+			-- 				capabilities = capabilities,
+			-- 				filetypes = {
+			-- 					"html",
+			-- 					"css",
+			-- 					"javascript",
+			-- 					"typescript",
+			-- 					"javascriptreact",
+			-- 					"typescriptreact",
+			-- 					"vue",
+			-- 					"svelte",
+			-- 				},
+			-- 			})
+			-- 		end,
+			-- 		["volar"] = function()
+			-- 			-- configure graphql language server
+			-- 			lspconfig["volar"].setup({
+			-- 				capabilities = capabilities,
+			-- 				filetypes = { "vue" },
+			-- 			})
+			-- 		end,
+			--
+			-- 	})
 		})
 	end,
 }
