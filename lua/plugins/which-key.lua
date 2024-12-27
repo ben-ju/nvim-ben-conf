@@ -61,6 +61,9 @@ return {
 		wk.add({
 			{ "<leader>m", group = "menu", mode = { "n", "v" } },
 		})
+		wk.add({
+			{ "<leader>t", group = "tab", mode = { "n", "v" } },
+		})
 	end,
 	-- keys = {
 	-- 	{
