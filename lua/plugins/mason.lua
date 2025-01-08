@@ -29,19 +29,17 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"ts_ls",
-				"phpactor",
+				"intelephense",
 				"html",
 				"cssls",
 				"tailwindcss",
 				"lua_ls",
-				"graphql",
 				"emmet_ls",
-				"marksman",
 				"jsonls",
 				"dotls",
 				"docker_compose_language_service",
 				"dockerls",
-				"cssls",
+				"pyright",
 			},
 		})
 
@@ -50,6 +48,7 @@ return {
 				"prettierd", -- prettier formatter
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
+				"black",
 				"php-cs-fixer",
 			},
 		})

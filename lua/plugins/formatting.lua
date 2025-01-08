@@ -18,7 +18,6 @@ return {
 				html = { "prettierd", "prettier" },
 				json = { "prettierd", "prettier" },
 				yaml = { "prettierd", "prettier" },
-				markdown = { "prettierd", "prettier" },
 				graphql = { "prettierd", "prettier" },
 				php = { "php-cs-fixer" },
 			},

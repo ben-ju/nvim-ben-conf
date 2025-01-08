@@ -3,6 +3,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
+		"j-hui/fidget.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
@@ -14,6 +15,9 @@ return {
 
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+		-- setup fidget
+		require("fidget").setup({})
 
 		local keymap = vim.keymap -- for conciseness
 
@@ -81,31 +85,6 @@ return {
 					capabilities = capabilities,
 				})
 			end,
-
-			-- 		["tailwindcss"] = function()
-			-- 			lspconfig["tailwindcss"].setup({
-			-- 				capabilities = capabilities,
-			-- 				filetypes = {
-			-- 					"html",
-			-- 					"css",
-			-- 					"javascript",
-			-- 					"typescript",
-			-- 					"javascriptreact",
-			-- 					"typescriptreact",
-			-- 					"vue",
-			-- 					"svelte",
-			-- 				},
-			-- 			})
-			-- 		end,
-			-- 		["volar"] = function()
-			-- 			-- configure graphql language server
-			-- 			lspconfig["volar"].setup({
-			-- 				capabilities = capabilities,
-			-- 				filetypes = { "vue" },
-			-- 			})
-			-- 		end,
-			--
-			-- 	})
 		})
 	end,
 }

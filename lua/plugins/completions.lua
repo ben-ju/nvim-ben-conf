@@ -1,20 +1,19 @@
 return {
 	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
-			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lsp",
+			"onsails/lspkind.nvim", -- vscode pictograms
 			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
+			"hrsh7th/cmp-buffer",
+			{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
 		},
 
 		config = function()
 			local cmp = require("cmp")
+			local lspkind = require("lspkind")
 			local luasnip = require("luasnip")
 			require("luasnip.loaders.from_vscode").lazy_load()
 			cmp.setup({
@@ -46,38 +45,28 @@ return {
 					{ name = "buffer" },
 					{ name = "path" },
 				}),
+				formatting = {
+					format = lspkind.cmp_format({
+						mode = "symbol", -- show only symbol annotations
+						maxwidth = {
+							-- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+							-- can also be a function to dynamically calculate max width such as
+							-- menu = function() return math.floor(0.45 * vim.o.columns) end,
+							menu = 50, -- leading text (labelDetails)
+							abbr = 50, -- actual suggestion item
+						},
+						ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+						show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+
+						-- The function below will be called before any actual modifications from lspkind
+						-- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+						before = function(entry, vim_item)
+							-- ...
+							return vim_item
+						end,
+					}),
+				},
 			})
 		end,
 	},
-	-- 	{
-	-- 		"saghen/blink.cmp",
-	-- 		dependencies = {
-	-- 			"rafamadriz/friendly-snippets",
-	-- 			{ "L3MON4D3/LuaSnip", version = "v2.*" },
-	-- 		},
-	-- 		-- use a release tag to download pre-built binaries
-	-- 		version = "v0.*",
-	-- 		opts = {
-	-- 			snippets = {
-	-- 				expand = function(snippet)
-	-- 					require("luasnip").lsp_expand(snippet)
-	-- 				end,
-	-- 				active = function(filter)
-	-- 					if filter and filter.direction then
-	-- 						return require("luasnip").jumpable(filter.direction)
-	-- 					end
-	-- 					return require("luasnip").in_snippet()
-	-- 				end,
-	-- 				jump = function(direction)
-	-- 					require("luasnip").jump(direction)
-	-- 				end,
-	-- 			},
-	-- 			keymap = { preset = "default" },
-	-- 			appearance = {
-	-- 				use_nvim_cmp_as_default = true,
-	-- 				nerd_font_variant = "mono",
-	-- 			},
-	-- 			signature = { enable = true },
-	-- 		},
-	-- 	},
 }
