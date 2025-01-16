@@ -71,7 +71,6 @@ return {
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 		-- local capabilities = require("blink.cmp").get_lsp_capabilities()
 		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
@@ -83,6 +82,101 @@ return {
 			function(server_name)
 				lspconfig[server_name].setup({
 					capabilities = capabilities,
+				})
+			end,
+			["intelephense"] = function()
+				lspconfig.intelephense.setup({
+					capabilities = capabilities,
+					settings = {
+						intelephense = {
+							licenseKey = "009PSYLBDG3DBWA",
+							files = {
+								maxSize = 5000000, -- Support des fichiers volumineux
+							},
+							stubs = {
+								"bcmath",
+								"bz2",
+								"Core",
+								"curl",
+								"date",
+								"dom",
+								"fileinfo",
+								"filter",
+								"hash",
+								"json",
+								"libxml",
+								"mbstring",
+								"mysql",
+								"openssl",
+								"pcre",
+								"PDO",
+								"pdo_mysql",
+								"Phar",
+								"readline",
+								"Reflection",
+								"session",
+								"SimpleXML",
+								"soap",
+								"sodium",
+								"SPL",
+								"standard",
+								"tokenizer",
+								"xml",
+								"xmlreader",
+								"xmlwriter",
+								"zip",
+								"zlib",
+								"laravel",
+							},
+							environment = {
+								includePaths = {
+									"vendor/laravel/framework/src",
+									"vendor/spatie/laravel-permission/src",
+									"vendor/laravel/sanctum/src",
+									"vendor/inertiajs/inertia-laravel/src",
+									"vendor/fakerphp/faker/src",
+									"vendor/typesense/typesense-php/src",
+								},
+							},
+							diagnostics = {
+								enable = true,
+							},
+						},
+					},
+				})
+			end,
+			["ts_ls"] = function()
+				lspconfig.ts_ls.setup({
+					capabilities = capabilities,
+					root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+					settings = {
+						typescript = {
+							preferences = {
+								importModuleSpecifier = "relative",
+								jsxAttributeCompletionStyle = "braces",
+							},
+						},
+						javascript = {
+							preferences = {
+								importModuleSpecifier = "relative",
+							},
+						},
+					},
+					environment = {
+						includePaths = {
+							"node_modules",
+							"node_modules/@types",
+							"resources/js",
+						},
+					},
+					on_attach = function(client, bufnr)
+						-- Désactiver le formatage par tsserver (préférence pour Prettier)
+						client.server_capabilities.documentFormattingProvider = false
+						-- Keymaps spécifiques à TypeScript/React
+						local ts_opts = { buffer = bufnr, silent = true }
+						keymap.set("n", "<leader>oi", "<cmd>TypescriptOrganizeImports<CR>", ts_opts)
+						keymap.set("n", "<leader>rf", "<cmd>TypescriptRenameFile<CR>", ts_opts)
+					end,
 				})
 			end,
 		})

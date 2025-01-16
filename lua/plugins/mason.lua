@@ -34,7 +34,6 @@ return {
 				"cssls",
 				"tailwindcss",
 				"lua_ls",
-				"emmet_ls",
 				"jsonls",
 				"dotls",
 				"docker_compose_language_service",
