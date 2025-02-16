@@ -19,6 +19,7 @@ return {
 			ensure_installed = {
 				"lua",
 				"javascript",
+				"go",
 				"html",
 				"php",
 				"typescript",

@@ -19,7 +19,7 @@ return {
 				json = { "prettierd", "prettier" },
 				yaml = { "prettierd", "prettier" },
 				graphql = { "prettierd", "prettier" },
-				php = { "php-cs-fixer" },
+				go = { "gofumpt", "goimports" },
 			},
 			format_on_save = {
 				-- if no formatter has been found, it will try to use lsp to format

@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"jay-babu/mason-nvim-dap.nvim",
 	},
 	config = function()
 		-- import mason
@@ -12,6 +13,7 @@ return {
 		local mason_lspconfig = require("mason-lspconfig")
 
 		local mason_tool_installer = require("mason-tool-installer")
+		-- local mason_dap = require("mason-nvim-dap")
 
 		-- enable mason and configure icons
 		mason.setup({
@@ -33,12 +35,14 @@ return {
 				"html",
 				"cssls",
 				"tailwindcss",
+				"sqlls",
 				"lua_ls",
 				"jsonls",
 				"dotls",
 				"docker_compose_language_service",
 				"dockerls",
 				"pyright",
+				"gopls",
 			},
 		})
 
@@ -48,8 +52,25 @@ return {
 				"prettier", -- prettier formatter
 				"stylua", -- lua formatter
 				"black",
+				"gofumpt",
+				"goimports",
+				"sql-formatter",
 				"php-cs-fixer",
+				"staticcheck",
+				-- Go tools
+				"gofumpt", -- Strict Go formatter
+				"goimports", -- Manages imports
+				"golines", -- Wraps long lines
+				"gomodifytags", -- Struct tag manipulation
+				"impl", -- Method stub generator
+				"gotests", -- Test generator
+				"staticcheck", -- Advanced linting
+				"delve", -- Debugger (DAP)
 			},
 		})
+		-- mason_dap.setup({
+		-- 	ensure_installed = { "delve" },
+		-- 	automatic_installation = true,
+		-- })
 	end,
 }
