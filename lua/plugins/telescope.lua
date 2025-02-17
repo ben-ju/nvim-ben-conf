@@ -52,8 +52,9 @@ return {
 		map("n", "-", ":Telescope file_browser<CR>")
 
 		map("n", "<leader>ff", builtin.find_files, { desc = "Find Files" }) -- Lists files in your current working directory, respects .gitignore
-		map("n", "<leader>fs", builtin.live_grep, { desc = "Find String" }) -- Lists files in your current working directory, respects .gitignore
+		map("n", "<leader>fs", builtin.live_grep, { desc = "Find String" }) -- List files containing a specific string
 		map("n", "<leader>ft", builtin.treesitter, { desc = "Treesitter List" }) -- Lists tree-sitter symbols
 		map("n", "<leader>fl", builtin.spell_suggest, { desc = "Spell Suggestions" }) -- Lists spell options
+		map("n", "<leader>fb", builtin.buffers, { desc = "Buffers List" }) -- List active buffers
 	end,
 }

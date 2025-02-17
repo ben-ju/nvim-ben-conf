@@ -7,6 +7,7 @@ return {
 
 	init = function()
 		vim.g.barbar_auto_setup = false
+		vim.opt.hidden = true -- Ensure buffers can be hidden
 	end,
 	opts = {
 		-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
@@ -42,7 +43,6 @@ return {
 		})
 		local map = vim.api.nvim_set_keymap
 		local opts = { noremap = true, silent = true }
-
 		-- Goto buffer in position...
 		--
 		-- local keymap = vim.keymap
@@ -53,6 +53,9 @@ return {
 		map("n", "<leader>tn", "<Cmd>BufferMoveNext<CR>", { desc = "Go to next tab" }) --  go to next tab
 		map("n", "<leader>tp", "<Cmd>BufferMovePrevious<CR>", { desc = "Go to previous tab" }) --  go to previous tab
 		map("n", "<leader>to", "<Cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
+		map("n", "<leader>tù", "<Cmd>vsplit<CR>", { desc = "Split the current buffer" }) -- Split the current buffer on the right
+
+		-- TODO : remove this from the which key
 		map("n", "<leader>ta", "<Cmd>BufferGoto 1<CR>", opts)
 		map("n", "<leader>tz", "<Cmd>BufferGoto 2<CR>", opts)
 		map("n", "<leader>te", "<Cmd>BufferGoto 3<CR>", opts)

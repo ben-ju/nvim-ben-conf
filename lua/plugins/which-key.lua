@@ -66,6 +66,9 @@ return {
 			{ "<leader>f", group = "find", mode = { "n", "v" } },
 		})
 		wk.add({
+			{ "<leader>w", group = "workspace", mode = { "n", "v" } },
+		})
+		wk.add({
 			{ "<leader>m", group = "menu", mode = { "n", "v" } },
 		})
 		wk.add({
