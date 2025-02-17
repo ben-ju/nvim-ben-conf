@@ -21,6 +21,16 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.opt.sessionoptions:append("globals")
+vim.api.nvim_create_user_command("Mksession", function(attr)
+	vim.api.nvim_exec_autocmds("User", { pattern = "SessionSavePre" })
+
+	-- Neovim 0.8+
+	vim.cmd.mksession({ bang = attr.bang, args = attr.fargs })
+
+	-- Neovim 0.7
+	vim.api.nvim_command("mksession " .. (attr.bang and "!" or "") .. attr.args)
+end, { bang = true, complete = "file", desc = "Save barbar with :mksession", nargs = "?" })
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {

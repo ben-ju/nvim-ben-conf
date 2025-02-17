@@ -44,7 +44,13 @@ return {
 			{ "<leader>?", desc = "Which key ?" },
 		})
 		wk.add({
+			{ "<leader>d", desc = "debugger", mode = { "n", "v" } },
+		})
+		wk.add({
 			{ "<leader>g", group = "git", mode = { "n", "v" } },
+		})
+		wk.add({
+			{ "<leader>cs", group = "[GO] struct", mode = { "n", "v" } },
 		})
 		wk.add({
 			{ "<leader>c", group = "code", mode = { "n" } },

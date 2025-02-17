@@ -2,11 +2,24 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	build = ":TSUpdate",
 	dependencies = {
+		{ "nvim-treesitter/nvim-treesitter-textobjects" }, -- syntax aware text objects
+		{
+			-- show code context
+			"nvim-treesitter/nvim-treesitter-context",
+			opts = { enable = true, mode = "topline" },
+		},
 		"windwp/nvim-ts-autotag",
 	},
 	config = function()
 		local config = require("nvim-treesitter.configs")
 		local autotag = require("nvim-ts-autotag")
+		vim.api.nvim_create_autocmd("Filetype", {
+			pattern = { "markdown" },
+			callback = function(ev)
+				-- context is buggy with markdown
+				require("treesitter-context").disable()
+			end,
+		})
 		autotag.setup({
 			opts = {
 				enable_close = true,
@@ -54,6 +67,8 @@ return {
 				},
 			},
 			sync_install = false,
+			auto_install = true,
+			text_objects = { select = { enable = true, lookahead = true } },
 			highlight = { enable = true },
 			indent = { enable = true },
 		})

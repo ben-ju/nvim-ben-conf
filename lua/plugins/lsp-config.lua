@@ -20,7 +20,6 @@ return {
 			callback = function(ev)
 				local opts = { buffer = ev.buf, silent = true }
 
-				-- Les différents keymaps (à adapter selon tes préférences)
 				opts.desc = "Show LSP references"
 				keymap.set("n", "cR", "<cmd>Telescope lsp_references<CR>", opts)
 

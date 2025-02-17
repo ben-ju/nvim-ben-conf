@@ -1,3 +1,4 @@
+-- TODO Change this public
 return {
 	"echasnovski/mini.nvim",
 	version = "*",
@@ -12,7 +13,7 @@ return {
 					MiniTrailspace.trim()
 				end)
 				if not ok then
-					vim.notify("Error while trimming trailspaces: " .. err, vim.log.levels.WARN)
+					return
 				end
 			end,
 		})

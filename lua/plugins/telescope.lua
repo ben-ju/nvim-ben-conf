@@ -1,58 +1,59 @@
 return {
-	{
-		"nvim-telescope/telescope.nvim",
-		tag = "0.1.8",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			local builtin = require("telescope.builtin")
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
-			vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Telescope live grep" })
-			vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "Telescope find word under cursor" })
-			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
+	"nvim-telescope/telescope.nvim",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+			enabled = true,
+		},
+		{ "nvim-telescope/telescope-file-browser.nvim", enabled = true },
+	},
+	branch = "0.1.x",
+	config = function()
+		local telescope = require("telescope")
+		local actions = require("telescope.actions")
 
-			-- Configuration principale de Telescope
-			require("telescope").setup({
-				defaults = {
-					-- Inclure les fichiers cachés et ignorer le .gitignore
-					vimgrep_arguments = {
-						"rg",
-						"--color=never",
-						"--no-heading",
-						"--with-filename",
-						"--line-number",
-						"--column",
-						"--smart-case",
-						"--no-ignore", -- Ne pas respecter le .gitignore
-						"--hidden", -- Inclure les fichiers cachés comme .env
-					},
-					-- Exclure les dossiers indésirables
-					file_ignore_patterns = { "node_modules/", ".git/", "vendor/", "dist/" },
-					-- Mappings personnalisés
-					mappings = {
-						i = {
-							["<C-n>"] = require("telescope.actions").move_selection_next,
-							["<C-p>"] = require("telescope.actions").move_selection_previous,
-						},
-						n = {
-							["<C-n>"] = require("telescope.actions").move_selection_next,
-							["<C-p>"] = require("telescope.actions").move_selection_previous,
-						},
+		telescope.setup({
+			defaults = {
+				sorting_strategy = "ascending",
+				layout_strategy = "horizontal",
+				layout_config = { prompt_position = "top" },
+				mappings = {
+					i = {
+						["<C-k>"] = actions.move_selection_previous, -- move to prev result
+						["<C-j>"] = actions.move_selection_next, -- move to next result
+						["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist, -- send selected to quickfixlist
 					},
 				},
-				pickers = {
-					-- Configuration spécifique pour `find_files`
-					find_files = {
-						-- Utiliser ripgrep pour inclure les fichiers cachés et ignorer le .gitignore
-						find_command = { "rg", "--files", "--no-ignore", "--hidden" },
-					},
+			},
+			extensions = {
+				file_browser = {
+					path = "%:p:h", -- open from within the folder of your current buffer
+					display_stat = false, -- don't show file stat
+					grouped = true, -- group initial sorting by directories and then files
+					hidden = true, -- show hidden files
+					hide_parent_dir = true, -- hide `../` in the file browser
+					hijack_netrw = true, -- use telescope file browser when opening directory paths
+					prompt_path = true, -- show the current relative path from cwd as the prompt prefix
+					use_fd = true, -- use `fd` instead of plenary, make sure to install `fd`
 				},
-			})
-		end,
-	},
-	{
-		"nvim-telescope/telescope-ui-select.nvim",
-		config = function()
-			require("telescope").load_extension("ui-select")
-		end,
-	},
+			},
+		})
+
+		telescope.load_extension("fzf")
+		telescope.load_extension("file_browser")
+
+		local builtin = require("telescope.builtin")
+
+		-- key maps
+		local map = vim.keymap.set
+
+		map("n", "-", ":Telescope file_browser<CR>")
+
+		map("n", "<leader>ff", builtin.find_files, { desc = "Find Files" }) -- Lists files in your current working directory, respects .gitignore
+		map("n", "<leader>fs", builtin.live_grep, { desc = "Find String" }) -- Lists files in your current working directory, respects .gitignore
+		map("n", "<leader>fx", builtin.treesitter, { desc = "Treesitter List" }) -- Lists tree-sitter symbols
+		map("n", "<leader>fl", builtin.spell_suggest, { desc = "Spell Suggestions" }) -- Lists spell options
+	end,
 }
