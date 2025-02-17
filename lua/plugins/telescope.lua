@@ -53,7 +53,7 @@ return {
 
 		map("n", "<leader>ff", builtin.find_files, { desc = "Find Files" }) -- Lists files in your current working directory, respects .gitignore
 		map("n", "<leader>fs", builtin.live_grep, { desc = "Find String" }) -- Lists files in your current working directory, respects .gitignore
-		map("n", "<leader>fx", builtin.treesitter, { desc = "Treesitter List" }) -- Lists tree-sitter symbols
+		map("n", "<leader>ft", builtin.treesitter, { desc = "Treesitter List" }) -- Lists tree-sitter symbols
 		map("n", "<leader>fl", builtin.spell_suggest, { desc = "Spell Suggestions" }) -- Lists spell options
 	end,
 }

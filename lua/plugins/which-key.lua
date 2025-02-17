@@ -40,26 +40,27 @@ return {
 			},
 			show_help = true, -- show help message on the command line when the popup is visible
 		})
+		-- wk.add({
+		-- 	{ "<leader>?", desc = "Which key ?" },
+		-- })
 		wk.add({
-			{ "<leader>?", desc = "Which key ?" },
+			{ "<leader>g", group = "LSP", mode = { "n", "v" } },
 		})
 		wk.add({
 			{ "<leader>d", desc = "debugger", mode = { "n", "v" } },
 		})
+
 		wk.add({
-			{ "<leader>g", group = "git", mode = { "n", "v" } },
+			{ "<leader>$", group = "git", mode = { "n", "v" } },
 		})
 		wk.add({
-			{ "<leader>cs", group = "[GO] struct", mode = { "n", "v" } },
+			{ "<leader>cs", group = "[GO]struct", mode = { "n", "v" } },
 		})
 		wk.add({
 			{ "<leader>c", group = "code", mode = { "n" } },
 		})
 		wk.add({
 			{ "<leader>x", group = "diagnostics", mode = { "n", "v" } },
-		})
-		wk.add({
-			{ "<leader>h", group = "harpoon", mode = { "n", "v" } },
 		})
 		wk.add({
 			{ "<leader>f", group = "find", mode = { "n", "v" } },
