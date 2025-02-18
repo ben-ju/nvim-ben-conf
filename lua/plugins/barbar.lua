@@ -49,20 +49,20 @@ return {
 
 		-- Tab related keys
 		-- map("n", "<leader>to", "<cmd>tabnew<CR>", { desc = "Open new tab" }) -- open new tab
-		map("n", "<leader>tx", "<Cmd>BufferClose<CR>", { desc = "Close current tab" }) -- close current tab
-		map("n", "<leader>tn", "<Cmd>BufferMoveNext<CR>", { desc = "Go to next tab" }) --  go to next tab
-		map("n", "<leader>tp", "<Cmd>BufferMovePrevious<CR>", { desc = "Go to previous tab" }) --  go to previous tab
-		map("n", "<leader>to", "<Cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
-		map("n", "<leader>tù", "<Cmd>vsplit<CR>", { desc = "Split the current buffer" }) -- Split the current buffer on the right
+		map("n", "<A-x>", "<Cmd>BufferClose<CR>", { desc = "Close current tab" }) -- close current tab
+		map("n", "<A-n>", "<Cmd>BufferNext<CR>", { desc = "Go to next tab" }) --  go to next tab
+		map("n", "<A-p>", "<Cmd>BufferPrevious<CR>", { desc = "Go to previous tab" }) --  go to previous tab
+		map("n", "<A-ù>", "<Cmd>vsplit<CR>", { desc = "Split the current buffer" }) -- Split the current buffer on the right
 
 		-- TODO : remove this from the which key
-		map("n", "<leader>ta", "<Cmd>BufferGoto 1<CR>", opts)
-		map("n", "<leader>tz", "<Cmd>BufferGoto 2<CR>", opts)
-		map("n", "<leader>te", "<Cmd>BufferGoto 3<CR>", opts)
-		map("n", "<leader>tr", "<Cmd>BufferGoto 4<CR>", opts)
-		map("n", "<leader>tt", "<Cmd>BufferGoto 5<CR>", opts)
-		map("n", "<leader>ty", "<Cmd>BufferGoto 6<CR>", opts)
-		map("n", "<leader>tu", "<Cmd>BufferGoto 7<CR>", opts)
-		map("n", "<leader>ti", "<Cmd>BufferGoto 8<CR>", opts)
+		map("n", "<A-a>", "<Cmd>BufferGoto 1<CR>", opts)
+		map("n", "<A-z>", "<Cmd>BufferGoto 2<CR>", opts)
+		map("n", "<A-e>", "<Cmd>BufferGoto 3<CR>", opts)
+		map("n", "<A-r>", "<Cmd>BufferGoto 4<CR>", opts)
+		map("n", "<A-t>", "<Cmd>BufferGoto 5<CR>", opts)
+		map("n", "<A-y>", "<Cmd>BufferGoto 6<CR>", opts)
+		map("n", "<A-u>", "<Cmd>BufferGoto 7<CR>", opts)
+		map("n", "<A-i>", "<Cmd>BufferGoto 8<CR>", opts)
+		map("n", "<A-o>", "<Cmd>BufferGoto 9<CR>", opts)
 	end,
 }

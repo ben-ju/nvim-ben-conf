@@ -71,6 +71,55 @@ return {
 			text_objects = { select = { enable = true, lookahead = true } },
 			highlight = { enable = true },
 			indent = { enable = true },
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						["ap"] = "@parameter.outer",
+						["ip"] = "@parameter.inner",
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						["ic"] = "@class.inner",
+					},
+				},
+				move = {
+					enable = true,
+					set_jumps = true, -- whether to set jumps in the jumplist
+					goto_next_start = {
+						["]F"] = "@function.outer",
+						["]C"] = "@class.outer",
+						["]P"] = "@parameter.inner",
+					},
+					goto_next_end = {
+						["]f"] = "@function.outer",
+						["]c"] = "@class.outer",
+						["]p"] = "@parameter.inner",
+					},
+					goto_previous_start = {
+
+						["@F"] = "@function.outer",
+						["@C"] = "@class.outer",
+						["@P"] = "@parameter.inner",
+					},
+					goto_previous_end = {
+						["@f"] = "@function.outer",
+						["@c"] = "@class.outer",
+						["@p"] = "@parameter.inner",
+					},
+				},
+				swap = {
+					enable = true,
+					swap_next = {
+						["spn"] = "@parameter.inner",
+					},
+					swap_previous = {
+						["spp"] = "@parameter.inner",
+					},
+				},
+			},
 		})
 	end,
 }
